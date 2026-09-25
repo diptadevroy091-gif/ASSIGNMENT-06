@@ -1446,8 +1446,8 @@ img {
     0 0 0 1px rgba(255, 92, 92, 0.08);
 
   animation:
-    duplicate-toast-in 0.25s ease,
-    duplicate-toast-out 0.25s ease 2.75s forwards;
+    duplicate-toast-in 0.3s ease,
+    duplicate-toast-out 0.3s ease 2.7s forwards;
 }
 
 .duplicate-toast-icon {
