@@ -418,11 +418,10 @@ img {
 }
 
 .workout-card:hover {
-  transform: translateY(-3px);
-  border-color: #3c4450;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  border-color: #4a5360;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
 }
-
 .card-image-wrapper {
   position: relative;
 
