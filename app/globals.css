@@ -1785,13 +1785,11 @@ img {
 
   .toast,
   .duplicate-toast {
-    top: 82px;
-
-    right: 12px;
+    top: 84px;
+    right: 14px;
     left: auto;
-
     min-width: 220px;
-    max-width: calc(100vw - 24px);
+    max-width: calc(100vw - 28px);
   }
 
   .footer-inner {
