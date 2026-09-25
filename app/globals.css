@@ -1,26 +1,1871 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+
 @import "tailwindcss";
 
+/* =========================================================
+   ROOT
+========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #000000;
+  --surface: #14171d;
+  --surface-2: #181b22;
+  --surface-3: #101318;
+
+  --border: #2a303a;
+  --border-soft: #222730;
+
+  --text: #f5f5f5;
+  --muted: #858c99;
+  --muted-2: #69717e;
+
+  --lime: #ccff00;
+  --lime-dark: #b9eb00;
+
+  --danger: #ff5c5c;
+  --danger-dark: #e04444;
+
+  --success: #7dff4f;
+  --success-dark: #58d934;
+
+  --radius: 10px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+}
+
+body,
+button,
+input,
+select {
+  font-family: "Inter", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 72px;
+  background: rgba(8, 9, 11, 0.96);
+  border-bottom: 1px solid #1d222a;
+  backdrop-filter: blur(12px);
+}
+
+.navbar-inner {
+  width: min(1180px, calc(100% - 40px));
+  height: 100%;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+/* =========================================================
+   NAVBAR LOGO
+========================================================= */
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 9px;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.navbar-logo-mark {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  background: var(--lime);
+  color: #111;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.navbar-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.navbar-brand-text {
+  color: #ffffff;
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.navbar-link {
+  padding: 9px 15px;
+  border-radius: 7px;
+
+  color: #8b929e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: #ffffff;
+}
+
+.navbar-link.active {
+  color: var(--lime);
+  background: #1a230d;
+}
+
+/* =========================================================
+   NAVBAR RIGHT
+========================================================= */
+
+.navbar-actions {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.plan-badge,
+.saved-badge {
+  min-width: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 7px 10px;
+  border-radius: 20px;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  transition: transform 0.2s ease;
+}
+
+.plan-badge:hover,
+.saved-badge:hover {
+  transform: translateY(-1px);
+}
+
+.plan-badge {
+  background: var(--lime);
+  color: #111111;
+}
+
+.saved-badge {
+  background: transparent;
+  color: #b7bdc7;
+  border: 1px solid #343b47;
+}
+
+.plan-badge span,
+.saved-badge span {
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.plan-badge strong,
+.saved-badge strong {
+  font-size: 11px;
+}
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.home {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 34px 0 80px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  min-height: 390px;
+
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  align-items: center;
+
+  padding: 48px 54px;
+
+  overflow: hidden;
+
+  border: 1px solid #292f38;
+  border-radius: 11px;
+
+  background: #15181e;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-eyebrow {
+  margin: 0 0 18px;
+
+  color: var(--lime);
+
+  font-family: "Inter", sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.hero-title {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(48px, 5vw, 68px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+
+  text-transform: uppercase;
+}
+
+.hero-description {
+  max-width: 500px;
+
+  margin: 22px 0 26px;
+
+  color: #858c98;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 11px 18px;
+
+  border-radius: 5px;
+
+  background: var(--lime);
+  color: #101010;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.hero-button:hover {
+  background: var(--lime-dark);
+  transform: translateY(-2px);
+}
+
+.hero-button-arrow {
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.hero-visual {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-visual img {
+  width: 100%;
+  max-width: 330px;
+  max-height: 330px;
+  object-fit: contain;
+}
+
+/* =========================================================
+   LIBRARY
+========================================================= */
+
+.library {
+  margin-top: 48px;
+  scroll-margin-top: 90px;
+}
+
+.library-heading {
+  margin-bottom: 23px;
+}
+
+.library-eyebrow {
+  margin: 0 0 7px;
+
+  color: var(--lime);
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.section-title {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.section-subtitle {
+  margin: 7px 0 0;
+
+  color: #858c99;
+  font-size: 11px;
+}
+
+/* =========================================================
+   WORKOUT GRID
+========================================================= */
+
+.workout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.workout-card {
+  overflow: hidden;
+
+  border: 1px solid #2b313b;
+  border-radius: 10px;
+
+  background: #14171d;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.workout-card:hover {
+  transform: translateY(-3px);
+  border-color: #3c4450;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-image-wrapper {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 16 / 8.7;
+
+  overflow: hidden;
+
+  background: #0e1014;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.3s ease;
+}
+
+.workout-card:hover .card-image {
+  transform: scale(1.02);
+}
+
+.card-number {
+  display: none;
+}
+
+.card-content {
+  padding: 16px 17px 15px;
+}
+
+.tag-row {
+  min-height: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 9px;
+
+  border-radius: 20px;
+
+  background: var(--lime);
+  color: #101010;
+
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.card-content h3 {
+  margin: 13px 0 5px;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.1;
+
+  text-transform: uppercase;
+}
+
+.equipment {
+  margin: 0;
+
+  color: #777f8c;
+  font-size: 9px;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 14px;
+  padding-top: 11px;
+
+  border-top: 1px solid #272d35;
+
+  color: #858d99;
+  font-size: 9px;
+}
+
+.stats-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stats-row span:first-child {
+  color: #858d99;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading,
+.loading-page {
+  min-height: 55vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  color: var(--lime);
+
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+}
+
+.loading-spinner {
+  width: 19px;
+  height: 19px;
+
+  display: inline-block;
+
+  border: 2px solid #323943;
+  border-top-color: var(--lime);
+  border-radius: 50%;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   MY PLAN PAGE
+========================================================= */
+
+.plan-page {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 42px 0 90px;
+}
+
+.plan-header {
+  margin-bottom: 24px;
+}
+
+.plan-title {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.plan-subtitle {
+  margin: 8px 0 0;
+
+  color: #858c99;
+  font-size: 11px;
+}
+
+/* =========================================================
+   METRICS
+========================================================= */
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  margin-bottom: 31px;
+  padding: 31px 24px;
+
+  border: 1px solid #292f39;
+  border-radius: 12px;
+
+  background: #14171d;
+}
+
+.metric {
+  padding: 0 25px;
+  border-right: 1px solid #252b34;
+}
+
+.metric:first-child {
+  padding-left: 0;
+}
+
+.metric:last-child {
+  border-right: 0;
+}
+
+.metric-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #7f8794;
+  font-size: 10px;
+}
+
+.metric-value {
+  display: block;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 37px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.metric:first-child .metric-value {
+  color: var(--lime);
+}
+
+/* =========================================================
+   PLAN TOOLBAR
+========================================================= */
+
+.plan-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 23px;
+}
+
+.plan-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px;
+
+  border: 1px solid #29303a;
+  border-radius: 9px;
+
+  background: #14171d;
+}
+
+.plan-tab {
+  padding: 9px 16px;
+
+  border-radius: 6px;
+
+  background: transparent;
+  color: #808894;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.plan-tab:hover {
+  color: #ffffff;
+}
+
+.plan-tab.active {
+  background: #272d36;
+  color: #ffffff;
+}
+
+/* =========================================================
+   SORT
+========================================================= */
+
+.sort-box {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #858c99;
+  font-size: 10px;
+}
+
+.sort-box select {
+  min-width: 92px;
+
+  padding: 9px 11px;
+
+  border: 1px solid #303742;
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #14171d;
+  color: #eeeeee;
+
+  font-size: 10px;
+}
+
+.sort-box select:focus {
+  border-color: var(--lime);
+}
+
+.sort-box option {
+  background: #14171d;
+  color: #ffffff;
+}
+
+/* =========================================================
+   PLAN LIST
+========================================================= */
+
+.plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.plan-card {
+  min-height: 114px;
+
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+
+  padding: 16px;
+
+  border: 1px solid #2a3039;
+  border-radius: 12px;
+
+  background: #14171d;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.plan-card:hover {
+  border-color: #3a424e;
+}
+
+.plan-card.done {
+  border-color: #39451b;
+  background: #151a12;
+}
+
+.plan-thumb {
+  width: 145px;
+  height: 78px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+.plan-card-title {
+  margin: 0 0 4px;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.plan-card.done .plan-card-title {
+  color: #9ca3ad;
+  text-decoration: line-through;
+}
+
+.plan-card-equipment {
+  margin: 0;
+
+  color: #7c8490;
+  font-size: 10px;
+}
+
+.plan-card-stats {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  margin-top: 11px;
+
+  color: #8b929e;
+  font-size: 9px;
+}
+
+.plan-card-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* =========================================================
+   PLAN CARD ACTIONS
+========================================================= */
+
+.plan-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.plan-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 34px;
+  padding: 0 16px;
+
+  border: 1px solid #3a424e;
+  border-radius: 20px;
+
+  background: transparent;
+  color: #d7dbe0;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.plan-action:hover {
+  border-color: #69727f;
+  color: #ffffff;
+}
+
+/* =========================================================
+   MARK AS DONE BUTTON
+========================================================= */
+
+.plan-card-actions button.plan-action {
+  border-color: var(--lime);
+  background: var(--lime);
+  color: #111111;
+}
+
+.plan-card-actions button.plan-action:hover:not(:disabled) {
+  border-color: var(--lime-dark);
+  background: var(--lime-dark);
+  color: #111111;
+
+  transform: translateY(-1px);
+}
+
+.done-action {
+  border-color: var(--lime) !important;
+  background: var(--lime) !important;
+  color: #111111 !important;
+}
+
+.done-action:hover {
+  border-color: var(--lime-dark) !important;
+  background: var(--lime-dark) !important;
+}
+
+/* =========================================================
+   REMOVE BUTTON
+========================================================= */
+
+.remove-action {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  color: var(--danger);
+
+  font-size: 22px;
+  line-height: 1;
+
+  border-radius: 50%;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.remove-action:hover {
+  color: #ffffff;
+  background: rgba(255, 92, 92, 0.15);
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  border: 1px dashed #303640;
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+.empty-state h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 27px;
+}
+
+.empty-state p {
+  margin: 9px 0 20px;
+
+  color: #7e8692;
+  font-size: 11px;
+}
+
+.empty-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 11px 17px;
+
+  border-radius: 5px;
+
+  background: var(--lime);
+  color: #111111;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.empty-button:hover {
+  background: var(--lime-dark);
+}
+
+/* =========================================================
+   DETAIL PAGE
+========================================================= */
+
+.detail-page {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 32px 0 90px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 22px;
+
+  color: #858d99;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  color: var(--lime);
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.detail-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  border: 1px solid #2a3039;
+  border-radius: 12px;
+
+  background: #14171d;
+}
+
+.detail-content {
+  padding: 4px 0;
+}
+
+.detail-title {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 700;
+  line-height: 0.95;
+
+  text-transform: uppercase;
+}
+
+.detail-description {
+  margin: 18px 0;
+
+  color: #858c99;
+
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  margin-bottom: 22px;
+}
+
+/* =========================================================
+   SPEC TABLE
+========================================================= */
+
+.spec-table {
+  overflow: hidden;
+
+  border: 1px solid #292f38;
+  border-radius: 9px;
+
+  background: #14171d;
+}
+
+.spec-row {
+  min-height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 15px;
+
+  border-bottom: 1px solid #252b33;
+}
+
+.spec-row:last-child {
+  border-bottom: 0;
+}
+
+.spec-label {
+  color: #737c89;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.spec-value {
+  color: #eeeeee;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  text-align: right;
+}
+
+/* =========================================================
+   INSTRUCTIONS
+========================================================= */
+
+.instructions-title {
+  margin: 28px 0 13px;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 21px;
+
+  text-transform: uppercase;
+}
+
+.instructions {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  counter-reset: instruction;
+}
+
+.instructions li {
+  position: relative;
+
+  margin-bottom: 10px;
+  padding-left: 34px;
+
+  color: #858d99;
+
+  font-size: 10px;
+  line-height: 1.6;
+
+  counter-increment: instruction;
+}
+
+.instructions li::before {
+  content: counter(instruction);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #1d2410;
+  color: var(--lime);
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   DETAIL ACTIONS
+========================================================= */
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+
+  margin-top: 25px;
+}
+
+.primary-action,
+.secondary-action,
+.already-added-action {
+  min-height: 40px;
+
+  padding: 0 18px;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* =========================================================
+   ADD TO PLAN
+========================================================= */
+
+.primary-action {
+  background: var(--lime);
+  color: #111111;
+}
+
+.primary-action:hover:not(:disabled) {
+  background: var(--lime-dark);
+  transform: translateY(-1px);
+}
+
+.primary-action:disabled {
+  opacity: 0.45;
+}
+
+/* =========================================================
+   ALREADY ADDED BUTTON
+========================================================= */
+
+.already-added-action {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 0 18px;
+
+  border: 1px solid #3a5015;
+  border-radius: 7px;
+
+  background: #171d10;
+  color: #e8ebdf;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.already-added-action:hover {
+  border-color: #66851d;
+  background: #1c2512;
+
+  transform: translateY(-1px);
+}
+
+.already-added-icon {
+  width: 21px;
+  height: 21px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--lime);
+  color: #111111;
+
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* =========================================================
+   SECONDARY ACTION
+========================================================= */
+
+.secondary-action {
+  border: 1px solid #3a424d;
+
+  background: transparent;
+  color: #d6dae0;
+}
+
+.secondary-action:hover {
+  border-color: #68717e;
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   TOAST - DEFAULT POSITIVE / SUCCESS
+========================================================= */
+
+.toast {
+  position: fixed;
+
+  top: 88px;
+  right: 24px;
+
+  z-index: 99999;
+
+  min-width: 245px;
+  max-width: 340px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 13px 16px;
+
+  border: 1px solid #477c2d;
+  border-radius: 8px;
+
+  /*
+    GREEN SUCCESS TOAST
+  */
+  background: #14220f;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(125, 255, 79, 0.08);
+
+  animation:
+    toast-in 0.25s ease,
+    toast-out 0.25s ease 2.75s forwards;
+}
+
+/* Green check icon */
+
+.toast::before {
+  content: "✓";
+
+  width: 21px;
+  height: 21px;
+
+  flex: 0 0 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--success);
+  color: #101010;
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+/* =========================================================
+   TOAST - SUCCESS VARIATIONS
+========================================================= */
+
+/*
+  If your React code uses any of these classes,
+  they will also become GREEN.
+*/
+
+.success-toast,
+.toast.success,
+.toast-success {
+  border-color: #477c2d;
+  background: #14220f;
+  color: #ffffff;
+}
+
+.success-toast::before,
+.toast.success::before,
+.toast-success::before {
+  content: "✓";
+  background: var(--success);
+  color: #101010;
+}
+
+/* =========================================================
+   TOAST ANIMATION
+========================================================= */
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+}
+
+/* =========================================================
+   DUPLICATE / NEGATIVE TOAST
+========================================================= */
+
+.duplicate-toast {
+  position: fixed;
+
+  top: 88px;
+  right: 24px;
+
+  z-index: 99999;
+
+  min-width: 245px;
+  max-width: 340px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 13px 16px;
+
+  border: 1px solid #713333;
+  border-radius: 8px;
+
+  /*
+    RED NEGATIVE TOAST
+  */
+  background: #211313;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 92, 92, 0.08);
+
+  animation:
+    duplicate-toast-in 0.25s ease,
+    duplicate-toast-out 0.25s ease 2.75s forwards;
+}
+
+.duplicate-toast-icon {
+  width: 21px;
+  height: 21px;
+
+  flex: 0 0 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--danger);
+  color: #111111;
+
+  font-size: 12px;
+  font-weight: 900;
+}
+
+@keyframes duplicate-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes duplicate-toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+}
+
+/* =========================================================
+   OTHER NEGATIVE TOAST CLASS SUPPORT
+========================================================= */
+
+.error-toast,
+.toast.error,
+.toast-error,
+.danger-toast,
+.toast.danger {
+  border-color: #713333;
+  background: #211313;
+  color: #ffffff;
+}
+
+.error-toast::before,
+.toast.error::before,
+.toast-error::before,
+.danger-toast::before,
+.toast.danger::before {
+  content: "!";
+  background: var(--danger);
+  color: #111111;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+  margin-top: 70px;
+
+  border-top: 1px solid #1c2027;
+
+  background: #0b0d10;
+}
+
+.footer-inner {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 78px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer-brand img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.footer-copy {
+  color: #626a76;
+  font-size: 9px;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .navbar-inner {
+    width: min(100% - 30px, 1180px);
+  }
+
+  .hero {
+    grid-template-columns: 1fr 0.65fr;
+    padding: 40px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .workout-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .detail-image {
+    max-height: 500px;
+  }
+
+  .plan-card {
+    grid-template-columns: 125px minmax(0, 1fr);
+  }
+
+  .plan-thumb {
+    width: 125px;
+  }
+
+  .plan-card-actions {
+    grid-column: 1 / -1;
+
+    justify-content: flex-start;
+
+    padding-top: 5px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .navbar {
+    height: auto;
+    min-height: 72px;
+  }
+
+  .navbar-inner {
+    width: calc(100% - 24px);
+    min-height: 72px;
+
+    grid-template-columns: 1fr auto;
+
+    padding: 12px 0;
+    row-gap: 10px;
+  }
+
+  .navbar-brand {
+    font-size: 16px;
+  }
+
+  .navbar-actions {
+    gap: 5px;
+  }
+
+  .plan-badge,
+  .saved-badge {
+    min-width: 59px;
+    padding: 6px 8px;
+  }
+
+  .navbar-links {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .navbar-link {
+    flex: 1;
+    text-align: center;
+  }
+
+  .home {
+    width: calc(100% - 24px);
+    padding-top: 20px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+
+    padding: 30px 24px;
+
+    min-height: auto;
+  }
+
+  .hero-title {
+    font-size: 43px;
+  }
+
+  .hero-description {
+    font-size: 11px;
+  }
+
+  .hero-visual {
+    min-height: 230px;
+    margin-top: 12px;
+  }
+
+  .hero-visual img {
+    max-height: 230px;
+  }
+
+  .library {
+    margin-top: 40px;
+  }
+
+  .workout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-page,
+  .detail-page {
+    width: calc(100% - 24px);
+    padding-top: 28px;
+  }
+
+  .plan-title {
+    font-size: 29px;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+    padding: 20px;
+  }
+
+  .metric {
+    padding: 0 0 18px;
+
+    border-right: 0;
+    border-bottom: 1px solid #252b34;
+  }
+
+  .metric:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .metric-value {
+    font-size: 32px;
+  }
+
+  .plan-toolbar {
+    align-items: flex-start;
+
+    gap: 14px;
+
+    flex-direction: column;
+  }
+
+  .sort-box {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sort-box select {
+    flex: 1;
+    max-width: 130px;
+  }
+
+  .plan-card {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .plan-thumb {
+    width: 100%;
+    height: 170px;
+  }
+
+  .plan-card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+
+    width: 100%;
+  }
+
+  .plan-action {
+    width: 100%;
+  }
+
+  .detail-title {
+    font-size: 40px;
+  }
+
+  .detail-actions {
+    flex-direction: column;
+  }
+
+  .primary-action,
+  .secondary-action,
+  .already-added-action {
+    width: 100%;
+  }
+
+  .toast,
+  .duplicate-toast {
+    top: 82px;
+
+    right: 12px;
+    left: auto;
+
+    min-width: 220px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .footer-inner {
+    width: calc(100% - 24px);
+
+    min-height: auto;
+
+    padding: 20px 0;
+
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 10px;
+
+    text-align: center;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+  .hero-title {
+    font-size: 37px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  .navbar-actions {
+    gap: 4px;
+  }
+
+  .plan-badge,
+  .saved-badge {
+    min-width: 52px;
+
+    gap: 4px;
+
+    padding: 6px;
+  }
+
+  .plan-badge span,
+  .saved-badge span {
+    font-size: 7px;
+  }
+
+  .plan-badge strong,
+  .saved-badge strong {
+    font-size: 10px;
+  }
+
+  .plan-tabs {
+    width: 100%;
+  }
+
+  .plan-tab {
+    flex: 1;
+  }
+
+  .plan-card-actions {
+    grid-template-columns: 1fr auto;
+  }
+
+  .plan-card-actions .done-action {
+    grid-column: 1;
+  }
+
+  .remove-action {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
