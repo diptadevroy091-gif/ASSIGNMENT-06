@@ -766,7 +766,9 @@ img {
 }
 
 .plan-card:hover {
-  border-color: #3a424e;
+  border-color: #46505a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
 }
 
 .plan-card.done {
