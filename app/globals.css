@@ -2,9 +2,7 @@
 
 @import "tailwindcss";
 
-/* =========================================================
-   ROOT
-========================================================= */
+/* ROOT */
 
 :root {
   --bg: #000000;
@@ -25,9 +23,7 @@
   --radius: 10px;
 }
 
-/* =========================================================
-   RESET
-========================================================= */
+/* RESET */
 
 * {
   box-sizing: border-box;
@@ -41,6 +37,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
   min-height: 100%;
 }
 
@@ -48,6 +45,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", sans-serif;
+  overflow-x: hidden;
 }
 
 body,
@@ -77,9 +75,11 @@ img {
   max-width: 100%;
 }
 
-/* =========================================================
-   NAVBAR - DESKTOP
-========================================================= */
+main {
+  width: 100%;
+}
+
+/* NAVBAR */
 
 .navbar {
   position: sticky;
@@ -102,20 +102,28 @@ img {
   align-items: center;
 }
 
-/* =========================================================
-   LOGO
-========================================================= */
+/* NAVBAR LEFT */
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  min-width: 0;
+}
+
+/* LOGO */
 
 .navbar-brand {
   display: inline-flex;
   align-items: center;
-  justify-self: start;
   gap: 9px;
 
   font-family: "Oswald", sans-serif;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0.04em;
+
+  white-space: nowrap;
 }
 
 .navbar-logo {
@@ -132,15 +140,16 @@ img {
   letter-spacing: 0.04em;
 }
 
-/* =========================================================
-   NAV LINKS
-========================================================= */
+/* DESKTOP NAV LINKS */
 
 .navbar-links {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
+
+  /* This keeps WORKOUT / MY PLAN in the true center */
+  justify-self: center;
 }
 
 .navbar-link {
@@ -172,27 +181,38 @@ img {
   background: #1a230d;
 }
 
-/* =========================================================
-   NAVBAR RIGHT
-========================================================= */
+/* NAVBAR RIGHT */
 
-.navbar-actions {
+.navbar-right {
   justify-self: end;
 
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+
+  gap: 18px;
 }
+
+/* PLAN + SAVED */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 8px;
+}
+
+/* BADGES */
 
 .plan-badge,
 .saved-badge {
-  min-width: 70px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+
+  gap: 5px;
+  min-width: 58px;
 
   padding: 7px 10px;
 
@@ -200,6 +220,8 @@ img {
 
   font-size: 9px;
   font-weight: 700;
+
+  white-space: nowrap;
 
   transition:
     transform 0.2s ease,
@@ -231,11 +253,73 @@ img {
 .plan-badge strong,
 .saved-badge strong {
   font-size: 11px;
+  font-weight: 700;
 }
 
-/* =========================================================
-   HOME
-========================================================= */
+/* MOBILE MENU BUTTON */
+
+.menu-button {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 4px;
+  padding: 0;
+
+  border: 1px solid #343a43;
+  border-radius: 50%;
+
+  background: #0d0f12;
+  color: #ffffff;
+
+  flex-shrink: 0;
+}
+
+.menu-button span {
+  display: block;
+
+  width: 15px;
+  height: 2px;
+
+  border-radius: 2px;
+  background: #ffffff;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.menu-button:hover {
+  border-color: #596270;
+}
+
+.menu-button.open span:nth-child(1),
+.menu-button[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-button.open span:nth-child(2),
+.menu-button[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-button.open span:nth-child(3),
+.menu-button[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* MOBILE DROPDOWN */
+
+.mobile-menu {
+  display: none;
+}
+
+/* HOME */
 
 .home {
   width: min(1180px, calc(100% - 40px));
@@ -243,9 +327,7 @@ img {
   padding: 34px 0 80px;
 }
 
-/* =========================================================
-   HERO
-========================================================= */
+/* HERO */
 
 .hero {
   min-height: 390px;
@@ -273,7 +355,6 @@ img {
 
   color: var(--lime);
 
-  font-family: "Inter", sans-serif;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -287,6 +368,7 @@ img {
   font-family: "Oswald", sans-serif;
   font-size: clamp(48px, 5vw, 68px);
   font-weight: 700;
+
   line-height: 0.95;
   letter-spacing: -0.02em;
 
@@ -308,6 +390,7 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   gap: 8px;
 
   padding: 11px 18px;
@@ -336,11 +419,14 @@ img {
 }
 
 .hero-visual {
+  width: 100%;
   height: 100%;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  min-width: 0;
 }
 
 .hero-visual img {
@@ -351,9 +437,7 @@ img {
   object-fit: contain;
 }
 
-/* =========================================================
-   LIBRARY
-========================================================= */
+/* LIBRARY */
 
 .library {
   margin-top: 48px;
@@ -382,6 +466,7 @@ img {
   font-family: "Oswald", sans-serif;
   font-size: 29px;
   font-weight: 700;
+
   line-height: 1;
 
   text-transform: uppercase;
@@ -395,13 +480,12 @@ img {
   font-size: 11px;
 }
 
-/* =========================================================
-   WORKOUT GRID
-========================================================= */
+/* WORKOUT GRID */
 
 .workout-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+
   gap: 18px;
 }
 
@@ -421,7 +505,9 @@ img {
 
 .workout-card:hover {
   transform: translateY(-5px);
+
   border-color: #4a5360;
+
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
 }
 
@@ -429,6 +515,7 @@ img {
   position: relative;
 
   width: 100%;
+
   aspect-ratio: 16 / 8.7;
 
   overflow: hidden;
@@ -462,6 +549,7 @@ img {
 
   display: flex;
   flex-wrap: wrap;
+
   gap: 6px;
 }
 
@@ -491,6 +579,7 @@ img {
   font-family: "Oswald", sans-serif;
   font-size: 17px;
   font-weight: 600;
+
   line-height: 1.1;
 
   text-transform: uppercase;
@@ -507,6 +596,7 @@ img {
 .stats-row {
   display: flex;
   align-items: center;
+
   gap: 12px;
 
   margin-top: 14px;
@@ -522,12 +612,11 @@ img {
 .stats-row span {
   display: inline-flex;
   align-items: center;
+
   gap: 4px;
 }
 
-/* =========================================================
-   LOADING
-========================================================= */
+/* LOADING */
 
 .loading,
 .loading-page {
@@ -536,12 +625,14 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 12px;
 
   color: var(--lime);
 
   font-family: "Oswald", sans-serif;
   font-size: 18px;
+
   letter-spacing: 0.03em;
 }
 
@@ -553,6 +644,7 @@ img {
 
   border: 2px solid #323943;
   border-top-color: var(--lime);
+
   border-radius: 50%;
 
   animation: spin 0.7s linear infinite;
@@ -564,13 +656,13 @@ img {
   }
 }
 
-/* =========================================================
-   MY PLAN
-========================================================= */
+/*  MY PLAN */
 
 .plan-page {
   width: min(1180px, calc(100% - 40px));
+
   margin: 0 auto;
+
   padding: 42px 0 90px;
 }
 
@@ -586,6 +678,7 @@ img {
   font-family: "Oswald", sans-serif;
   font-size: 31px;
   font-weight: 700;
+
   line-height: 1;
 
   text-transform: uppercase;
@@ -599,9 +692,7 @@ img {
   font-size: 11px;
 }
 
-/* =========================================================
-   METRICS
-========================================================= */
+/* METRICS */
 
 .metrics {
   display: grid;
@@ -618,6 +709,7 @@ img {
 
 .metric {
   padding: 0 25px;
+
   border-right: 1px solid #252b34;
 }
 
@@ -647,6 +739,7 @@ img {
   font-family: "Oswald", sans-serif;
   font-size: 37px;
   font-weight: 600;
+
   line-height: 1;
 }
 
@@ -654,9 +747,7 @@ img {
   color: var(--lime);
 }
 
-/* =========================================================
-   PLAN TOOLBAR
-========================================================= */
+/* PLAN TOOLBAR */
 
 .plan-toolbar {
   display: flex;
@@ -669,6 +760,7 @@ img {
 .plan-tabs {
   display: flex;
   align-items: center;
+
   gap: 4px;
 
   padding: 4px;
@@ -700,13 +792,12 @@ img {
   color: #ffffff;
 }
 
-/* =========================================================
-   SORT
-========================================================= */
+/* SORT */
 
 .sort-box {
   display: flex;
   align-items: center;
+
   gap: 9px;
 
   color: #858c99;
@@ -721,6 +812,7 @@ img {
 
   border: 1px solid #303742;
   border-radius: 7px;
+
   outline: none;
 
   background: #14171d;
@@ -738,13 +830,12 @@ img {
   color: #ffffff;
 }
 
-/* =========================================================
-   PLAN LIST
-========================================================= */
+/* PLAN LIST */
 
 .plan-list {
   display: flex;
   flex-direction: column;
+
   gap: 16px;
 }
 
@@ -752,8 +843,11 @@ img {
   min-height: 114px;
 
   display: grid;
+
   grid-template-columns: 145px minmax(0, 1fr) auto;
+
   align-items: center;
+
   gap: 16px;
 
   padding: 16px;
@@ -771,7 +865,9 @@ img {
 
 .plan-card:hover {
   border-color: #46505a;
+
   transform: translateY(-2px);
+
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
 }
 
@@ -817,6 +913,7 @@ img {
 .plan-card-stats {
   display: flex;
   align-items: center;
+
   gap: 13px;
 
   margin-top: 11px;
@@ -829,17 +926,17 @@ img {
 .plan-card-stats span {
   display: inline-flex;
   align-items: center;
+
   gap: 4px;
 }
 
-/* =========================================================
-   PLAN CARD ACTIONS
-========================================================= */
+/*  PLAN CARD ACTIONS */
 
 .plan-card-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
   gap: 10px;
 }
 
@@ -849,6 +946,7 @@ img {
   justify-content: center;
 
   min-height: 34px;
+
   padding: 0 16px;
 
   border: 1px solid #3a424e;
@@ -876,31 +974,36 @@ img {
 
 .plan-card-actions button.plan-action {
   border-color: var(--lime);
+
   background: var(--lime);
   color: #111111;
 }
 
 .plan-card-actions button.plan-action:hover:not(:disabled) {
   border-color: var(--lime-dark);
+
   background: var(--lime-dark);
+
   color: #111111;
+
   transform: translateY(-1px);
 }
 
 .done-action {
   border-color: var(--lime) !important;
+
   background: var(--lime) !important;
+
   color: #111111 !important;
 }
 
 .done-action:hover {
   border-color: var(--lime-dark) !important;
+
   background: var(--lime-dark) !important;
 }
 
-/* =========================================================
-   REMOVE
-========================================================= */
+/* REMOVE */
 
 .remove-action {
   width: 30px;
@@ -911,6 +1014,7 @@ img {
   justify-content: center;
 
   background: transparent;
+
   color: var(--danger);
 
   font-size: 22px;
@@ -926,13 +1030,13 @@ img {
 
 .remove-action:hover {
   color: #ffffff;
+
   background: rgba(255, 92, 92, 0.15);
+
   transform: scale(1.05);
 }
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
+/* EMPTY STATE */
 
 .empty-state {
   min-height: 300px;
@@ -987,13 +1091,13 @@ img {
   background: var(--lime-dark);
 }
 
-/* =========================================================
-   DETAIL PAGE
-========================================================= */
+/* DETAIL PAGE */
 
 .detail-page {
   width: min(1180px, calc(100% - 40px));
+
   margin: 0 auto;
+
   padding: 32px 0 90px;
 }
 
@@ -1015,7 +1119,9 @@ img {
 
 .detail-layout {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 40px;
 
   align-items: start;
@@ -1023,6 +1129,7 @@ img {
 
 .detail-image {
   width: 100%;
+
   aspect-ratio: 1 / 1;
 
   object-fit: cover;
@@ -1045,6 +1152,7 @@ img {
   font-family: "Oswald", sans-serif;
   font-size: clamp(38px, 4vw, 58px);
   font-weight: 700;
+
   line-height: 0.95;
 
   text-transform: uppercase;
@@ -1056,20 +1164,20 @@ img {
   color: #858c99;
 
   font-size: 12px;
+
   line-height: 1.7;
 }
 
 .detail-tags {
   display: flex;
   flex-wrap: wrap;
+
   gap: 6px;
 
   margin-bottom: 22px;
 }
 
-/* =========================================================
-   SPEC TABLE
-========================================================= */
+/* SPEC TABLE */
 
 .spec-table {
   overflow: hidden;
@@ -1101,6 +1209,7 @@ img {
 
   font-size: 8px;
   font-weight: 700;
+
   letter-spacing: 0.05em;
 }
 
@@ -1113,9 +1222,7 @@ img {
   text-align: right;
 }
 
-/* =========================================================
-   INSTRUCTIONS
-========================================================= */
+/* INSTRUCTIONS */
 
 .instructions-title {
   margin: 28px 0 13px;
@@ -1146,6 +1253,7 @@ img {
   color: #858d99;
 
   font-size: 10px;
+
   line-height: 1.6;
 
   counter-increment: instruction;
@@ -1155,6 +1263,7 @@ img {
   content: counter(instruction);
 
   position: absolute;
+
   left: 0;
   top: 0;
 
@@ -1174,13 +1283,12 @@ img {
   font-weight: 800;
 }
 
-/* =========================================================
-   DETAIL ACTIONS
-========================================================= */
+/* DETAIL ACTIONS */
 
 .detail-actions {
   display: flex;
   flex-wrap: wrap;
+
   gap: 9px;
 
   margin-top: 25px;
@@ -1207,11 +1315,13 @@ img {
 
 .primary-action {
   background: var(--lime);
+
   color: #111111;
 }
 
 .primary-action:hover:not(:disabled) {
   background: var(--lime-dark);
+
   transform: translateY(-1px);
 }
 
@@ -1225,6 +1335,7 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   gap: 9px;
 
   padding: 0 18px;
@@ -1248,7 +1359,9 @@ img {
 
 .already-added-action:hover {
   border-color: #66851d;
+
   background: #1c2512;
+
   transform: translateY(-1px);
 }
 
@@ -1278,18 +1391,20 @@ img {
 
 .secondary-action:hover {
   border-color: #68717e;
+
   color: #ffffff;
+
   transform: translateY(-1px);
 }
 
-/* =========================================================
-   TOAST
-========================================================= */
+/* TOAST */
 
 .toast {
   position: fixed;
+
   top: 88px;
   right: 24px;
+
   z-index: 99999;
 
   min-width: 245px;
@@ -1297,6 +1412,7 @@ img {
 
   display: flex;
   align-items: center;
+
   gap: 10px;
 
   padding: 13px 16px;
@@ -1344,7 +1460,9 @@ img {
 .toast.success,
 .toast-success {
   border-color: #477c2d;
+
   background: #14220f;
+
   color: #ffffff;
 }
 
@@ -1352,6 +1470,7 @@ img {
 .toast.success::before,
 .toast-success::before {
   content: "✓";
+
   background: var(--success);
   color: #101010;
 }
@@ -1380,14 +1499,14 @@ img {
   }
 }
 
-/* =========================================================
-   DUPLICATE / ERROR TOAST
-========================================================= */
+/* DUPLICATE / ERROR TOAST */
 
 .duplicate-toast {
   position: fixed;
+
   top: 88px;
   right: 24px;
+
   z-index: 99999;
 
   min-width: 245px;
@@ -1395,6 +1514,7 @@ img {
 
   display: flex;
   align-items: center;
+
   gap: 10px;
 
   padding: 13px 16px;
@@ -1466,7 +1586,9 @@ img {
 .danger-toast,
 .toast.danger {
   border-color: #713333;
+
   background: #211313;
+
   color: #ffffff;
 }
 
@@ -1476,13 +1598,12 @@ img {
 .danger-toast::before,
 .toast.danger::before {
   content: "!";
+
   background: var(--danger);
   color: #111111;
 }
 
-/* =========================================================
-   FOOTER
-========================================================= */
+/* FOOTER */
 
 .footer {
   margin-top: 70px;
@@ -1494,6 +1615,7 @@ img {
 
 .footer-inner {
   width: min(1180px, calc(100% - 40px));
+
   min-height: 78px;
 
   margin: 0 auto;
@@ -1506,6 +1628,7 @@ img {
 .footer-brand {
   display: flex;
   align-items: center;
+
   gap: 8px;
 
   color: #ffffff;
@@ -1524,12 +1647,11 @@ img {
 
 .footer-copy {
   color: #626a76;
+
   font-size: 9px;
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
+/* TABLET */
 
 @media (max-width: 900px) {
   .navbar-inner {
@@ -1555,6 +1677,7 @@ img {
 
   .detail-layout {
     grid-template-columns: 1fr;
+
     gap: 30px;
   }
 
@@ -1579,233 +1702,633 @@ img {
   }
 }
 
-/* =========================================================
-   MOBILE NAVBAR
-========================================================= */
+/* MOBILE <= 650px */
 
 @media (max-width: 650px) {
+  /* 
+     NAVBAR */
+
   .navbar {
-    height: auto;
+    height: 64px;
     min-height: 64px;
+
+    position: sticky;
+    top: 0;
+
+    background: rgba(8, 9, 11, 0.98);
+
+    border-bottom: 1px solid #20252c;
+
+    z-index: 1000;
   }
 
   .navbar-inner {
     width: calc(100% - 20px);
-    min-height: 64px;
+    height: 64px;
 
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    margin: 0 auto;
+
+    /* Mobile uses flex */
+    display: flex;
 
     align-items: center;
-
-    padding: 8px 0;
+    justify-content: space-between;
 
     gap: 8px;
   }
 
-  /*
-    Current Navbar.jsx:
-    logo is on left,
-    navigation is beside it,
-    badges on right.
-    
-    On mobile we keep everything compact
-    so it does not wrap into 3 separate rows.
-  */
+  /* LEFT = LOGO */
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+
+    min-width: 0;
+
+    flex-shrink: 0;
+  }
 
   .navbar-brand {
-    justify-self: start;
-    gap: 6px;
+    display: flex;
+    align-items: center;
 
-    font-size: 15px;
+    gap: 7px;
+
+    white-space: nowrap;
   }
 
   .navbar-logo {
-    width: 25px;
-    height: 25px;
+    width: 27px;
+    height: 27px;
+
+    object-fit: contain;
   }
 
   .navbar-brand-text {
-    font-size: 15px;
+    display: block;
+
+    color: #ffffff;
+
+    font-family: "Oswald", sans-serif;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    letter-spacing: 0.03em;
   }
 
+  /* HIDE DESKTOP NAV */
+
   .navbar-links {
-    justify-self: center;
+    display: none !important;
+  }
+
+  /* RIGHT SIDE */
+
+  .navbar-right {
+    flex: 1;
+
+    min-width: 0;
+
+    margin-left: 20px;
 
     display: flex;
 
-    width: auto;
+    align-items: center;
 
-    gap: 2px;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    justify-self: auto;
   }
 
-  .navbar-link {
-    min-height: 36px;
-
-    padding: 8px 9px;
-
-    border-radius: 6px;
-
-    font-size: 9px;
-  }
+  /* PLAN + SAVED */
 
   .navbar-actions {
-    justify-self: end;
+    display: flex;
 
-    gap: 4px;
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
   }
+
+  /* BADGES */
 
   .plan-badge,
   .saved-badge {
-    min-width: 52px;
+    min-width: auto;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
 
     gap: 4px;
 
-    padding: 6px 6px;
+    padding: 6px 8px;
 
     border-radius: 18px;
+  }
+
+  .plan-badge {
+    background: var(--lime);
+    color: #111111;
+  }
+
+  .saved-badge {
+    background: transparent;
+
+    border: 1px solid #303640;
+
+    color: #b7bdc7;
   }
 
   .plan-badge span,
   .saved-badge span {
     font-size: 7px;
+
+    font-weight: 700;
   }
 
   .plan-badge strong,
   .saved-badge strong {
     font-size: 9px;
+
+    font-weight: 800;
+  }
+
+  /* HAMBURGER SHOW */
+
+  .menu-button {
+    display: flex;
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    border: 1px solid #343a43;
+
+    border-radius: 50%;
+
+    background: #0d0f12;
+
+    padding: 0;
+  }
+
+  .menu-button span {
+    display: block;
+
+    width: 15px;
+    height: 2px;
+
+    background: #d7dbe0;
+
+    border-radius: 2px;
+
+    transition: all 0.2s ease;
+  }
+
+  /* OPEN HAMBURGER */
+
+  .menu-button.open span:nth-child(1),
+  .menu-button[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .menu-button.open span:nth-child(2),
+  .menu-button[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-button.open span:nth-child(3),
+  .menu-button[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* MOBILE DROPDOWN */
+
+  .mobile-menu {
+    position: absolute;
+
+    top: 64px;
+
+    left: 10px;
+    right: 10px;
+
+    z-index: 9999;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 8px;
+
+    border: 1px solid #2b3139;
+
+    border-radius: 10px;
+
+    background: #14171d;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+    animation: mobile-menu-in 0.18s ease;
+  }
+
+  .mobile-menu-link {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+    min-height: 42px;
+
+    padding: 0 14px;
+
+    border-radius: 7px;
+
+    color: #8b929e;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.03em;
+  }
+
+  .mobile-menu-link:hover {
+    color: #ffffff;
+
+    background: #1b1f26;
+  }
+
+  .mobile-menu-link.active {
+    color: var(--lime);
+
+    background: #1a230d;
+  }
+
+  @keyframes mobile-menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* HOME */
 
   .home {
     width: calc(100% - 20px);
-    padding-top: 20px;
+
+    padding: 20px 0 60px;
   }
 
   /* HERO */
 
   .hero {
-    grid-template-columns: 1fr;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
 
     min-height: auto;
 
-    padding: 30px 22px;
+    padding: 30px 22px 20px;
+
+    border-radius: 12px;
+  }
+
+  .hero-content {
+    width: 100%;
+
+    max-width: none;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 15px;
+
+    font-size: 9px;
   }
 
   .hero-title {
-    font-size: 43px;
+    max-width: 100%;
+
+    font-size: 42px;
+
+    line-height: 0.94;
+
+    letter-spacing: -0.025em;
   }
 
   .hero-description {
+    max-width: 100%;
+
+    margin: 20px 0 24px;
+
     font-size: 11px;
+
+    line-height: 1.65;
+  }
+
+  .hero-button {
+    padding: 11px 17px;
+
+    font-size: 9px;
   }
 
   .hero-visual {
-    min-height: 230px;
+    width: 100%;
 
-    margin-top: 12px;
+    height: 290px;
+
+    min-height: 0;
+
+    margin-top: 8px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
   }
 
   .hero-visual img {
-    max-height: 230px;
+    width: 100%;
+
+    max-width: 320px;
+    max-height: 290px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    margin: 0 auto;
   }
 
   /* LIBRARY */
 
   .library {
-    margin-top: 40px;
+    margin-top: 38px;
+
+    scroll-margin-top: 75px;
   }
+
+  .library-heading {
+    margin-bottom: 20px;
+  }
+
+  .library-eyebrow {
+    font-size: 8px;
+  }
+
+  .section-title {
+    font-size: 28px;
+
+    line-height: 1;
+  }
+
+  .section-subtitle {
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+  /* WORKOUT GRID */
 
   .workout-grid {
     grid-template-columns: 1fr;
+
+    gap: 15px;
   }
 
-  /* PLAN */
+  .workout-card {
+    width: 100%;
+  }
+
+  .card-content {
+    padding: 14px 15px;
+  }
+
+  .card-content h3 {
+    font-size: 17px;
+  }
+
+  /* PLAN PAGE */
 
   .plan-page,
   .detail-page {
     width: calc(100% - 20px);
+
     padding-top: 28px;
+
+    padding-bottom: 60px;
   }
 
   .plan-title {
-    font-size: 29px;
+    font-size: 30px;
   }
+
+  .plan-subtitle {
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+  /* METRICS */
 
   .metrics {
     grid-template-columns: 1fr;
 
-    gap: 20px;
+    gap: 0;
 
-    padding: 20px;
+    margin-bottom: 25px;
+
+    padding: 18px;
   }
 
   .metric {
-    padding: 0 0 18px;
+    padding: 13px 0;
 
     border-right: 0;
+
     border-bottom: 1px solid #252b34;
+  }
+
+  .metric:first-child {
+    padding-top: 0;
   }
 
   .metric:last-child {
     padding-bottom: 0;
+
     border-bottom: 0;
+  }
+
+  .metric-label {
+    margin-bottom: 5px;
+
+    font-size: 9px;
   }
 
   .metric-value {
     font-size: 32px;
   }
 
+  /* PLAN TOOLBAR */
+
   .plan-toolbar {
-    align-items: flex-start;
+    display: flex;
+
     flex-direction: column;
 
-    gap: 14px;
+    align-items: stretch;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+  }
+
+  .plan-tabs {
+    width: 100%;
+
+    display: flex;
+  }
+
+  .plan-tab {
+    flex: 1;
+
+    padding: 10px 8px;
+
+    font-size: 9px;
+
+    text-align: center;
   }
 
   .sort-box {
     width: 100%;
 
+    display: flex;
+
     justify-content: space-between;
   }
 
   .sort-box select {
-    flex: 1;
+    width: 130px;
+
     max-width: 130px;
   }
 
+  /* PLAN CARD */
+
+  .plan-list {
+    gap: 13px;
+  }
+
   .plan-card {
+    width: 100%;
+
+    display: grid;
+
     grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    min-height: auto;
 
     padding: 12px;
   }
 
   .plan-thumb {
     width: 100%;
+
     height: 170px;
+
+    border-radius: 8px;
+  }
+
+  .plan-card-title {
+    font-size: 17px;
+  }
+
+  .plan-card-equipment {
+    font-size: 9px;
+  }
+
+  .plan-card-stats {
+    margin-top: 9px;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
   }
 
   .plan-card-actions {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns: 1fr 1fr auto;
 
-    width: 100%;
+    gap: 7px;
   }
 
   .plan-action {
     width: 100%;
+
+    min-height: 36px;
+
+    padding: 0 10px;
+
+    font-size: 8px;
+  }
+
+  .remove-action {
+    width: 32px;
+    height: 32px;
   }
 
   /* DETAIL */
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+  .detail-image {
+    width: 100%;
+
+    max-height: 430px;
+  }
 
   .detail-title {
     font-size: 40px;
   }
 
+  .detail-description {
+    font-size: 11px;
+  }
+
   .detail-actions {
     flex-direction: column;
+
+    width: 100%;
   }
 
   .primary-action,
@@ -1818,14 +2341,15 @@ img {
 
   .toast,
   .duplicate-toast {
-    top: 76px;
-    right: 10px;
+    top: 74px;
+
     left: 10px;
+    right: 10px;
+
+    width: auto;
 
     min-width: 0;
     max-width: none;
-
-    width: auto;
   }
 
   /* FOOTER */
@@ -1839,62 +2363,61 @@ img {
 
     flex-direction: column;
 
-    justify-content: center;
-
     gap: 10px;
 
     text-align: center;
   }
 }
 
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
+/* SMALL MOBILE <= 420px */
 
 @media (max-width: 420px) {
+  .navbar {
+    height: 60px;
+    min-height: 60px;
+  }
+
   .navbar-inner {
     width: calc(100% - 14px);
-    gap: 4px;
+
+    height: 60px;
+
+    gap: 5px;
   }
 
   .navbar-brand {
-    gap: 4px;
-  }
-
-  .navbar-brand-text {
-    font-size: 13px;
+    gap: 6px;
   }
 
   .navbar-logo {
-    width: 23px;
-    height: 23px;
+    width: 25px;
+    height: 25px;
   }
 
-  .navbar-links {
-    gap: 0;
+  .navbar-brand-text {
+    font-size: 15px;
   }
 
-  .navbar-link {
-    padding: 8px 6px;
-    font-size: 8px;
+  .navbar-right {
+    margin-left: 14px;
+
+    gap: 6px;
   }
 
   .navbar-actions {
-    gap: 3px;
+    gap: 5px;
   }
 
   .plan-badge,
   .saved-badge {
-    min-width: 46px;
+    padding: 5px 6px;
 
     gap: 3px;
-
-    padding: 5px 4px;
   }
 
   .plan-badge span,
   .saved-badge span {
-    font-size: 6px;
+    font-size: 7px;
   }
 
   .plan-badge strong,
@@ -1902,20 +2425,80 @@ img {
     font-size: 9px;
   }
 
+  .menu-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-menu {
+    top: 60px;
+  }
+
+  /* HERO */
+
+  .hero {
+    padding: 27px 20px 14px;
+  }
+
   .hero-title {
-    font-size: 37px;
+    font-size: 36px;
+
+    line-height: 0.94;
+  }
+
+  .hero-description {
+    font-size: 10px;
+
+    margin-top: 18px;
+    margin-bottom: 22px;
+  }
+
+  .hero-button {
+    padding: 10px 15px;
+
+    font-size: 8px;
+  }
+
+  .hero-visual {
+    height: 280px;
+
+    margin-top: 4px;
+  }
+
+  .hero-visual img {
+    max-width: 300px;
+    max-height: 280px;
   }
 
   .section-title {
     font-size: 26px;
   }
 
-  .plan-tabs {
-    width: 100%;
+  /* PLAN */
+
+  .plan-page,
+  .detail-page {
+    width: calc(100% - 14px);
   }
 
-  .plan-tab {
-    flex: 1;
+  .plan-title {
+    font-size: 28px;
+  }
+
+  .metrics {
+    padding: 18px;
+  }
+
+  .metric-value {
+    font-size: 30px;
+  }
+
+  .plan-card {
+    padding: 10px;
+  }
+
+  .plan-thumb {
+    height: 155px;
   }
 
   .plan-card-actions {
@@ -1928,6 +2511,171 @@ img {
 
   .remove-action {
     grid-column: 2;
+
     grid-row: 1;
+  }
+}
+
+/* VERY SMALL PHONES <= 360px */
+
+@media (max-width: 360px) {
+  .navbar-inner {
+    width: calc(100% - 10px);
+  }
+
+  .navbar-brand-text {
+    font-size: 14px;
+  }
+
+  .navbar-logo {
+    width: 23px;
+    height: 23px;
+  }
+
+  .navbar-right {
+    margin-left: 10px;
+  }
+
+  .plan-badge span,
+  .saved-badge span {
+    font-size: 6px;
+  }
+
+  .plan-badge strong,
+  .saved-badge strong {
+    font-size: 8px;
+  }
+
+  .menu-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .hero-title {
+    font-size: 33px;
+  }
+
+  .hero-description {
+    font-size: 9px;
+  }
+
+  .mobile-menu {
+    left: 7px;
+    right: 7px;
+  }
+}
+/* FITLOG ACTION ICONS */
+
+.primary-action,
+.secondary-action,
+.already-added-action,
+.plan-action,
+.remove-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-action,
+.secondary-action,
+.already-added-action {
+  gap: 9px;
+}
+
+.action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.action-icon svg {
+  display: block;
+}
+
+.primary-action svg,
+.secondary-action svg,
+.already-added-action svg {
+  flex-shrink: 0;
+}
+
+/* MY PLAN — DONE BUTTON */
+
+.done-action {
+  gap: 8px;
+}
+
+.done-action .action-icon {
+  color: currentColor;
+}
+
+.done-action svg {
+  display: block;
+}
+
+/* REMOVE BUTTON */
+
+.remove-action {
+  gap: 0;
+  line-height: 0;
+}
+
+.remove-action svg {
+  display: block;
+}
+
+/* PLAN CARD STATS ICONSn */
+
+.plan-card-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.plan-card-stats svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   BUTTON ACCESSIBILITY
+   ========================================================= */
+
+.primary-action:focus-visible,
+.secondary-action:focus-visible,
+.already-added-action:focus-visible,
+.plan-action:focus-visible,
+.remove-action:focus-visible,
+.plan-tab:focus-visible,
+.sort-box select:focus-visible {
+  outline: 2px solid #ccff00;
+  outline-offset: 3px;
+}
+
+/* DISABLED PLAN BUTTON */
+
+.primary-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+  .detail-actions {
+    width: 100%;
+  }
+
+  .detail-actions button {
+    width: 100%;
+  }
+
+  .plan-card-actions {
+    width: 100%;
+  }
+
+  .plan-card-actions .plan-action {
+    justify-content: center;
   }
 }

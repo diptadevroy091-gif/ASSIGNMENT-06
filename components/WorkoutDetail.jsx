@@ -4,6 +4,77 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePlan } from "../context/PlanProvider";
 
+function PlusIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="17"
+      height="17"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+function BookmarkIcon({ filled = false }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="17"
+      height="17"
+      fill={filled ? "currentColor" : "none"}
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 3.5A1.5 1.5 0 0 1 7.5 2h9A1.5 1.5 0 0 1 18 3.5V21l-6-3.8L6 21V3.5Z" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="17"
+      height="17"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m5 12 4 4L19 6" />
+    </svg>
+  );
+}
+
+function AlertIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="17"
+      height="17"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 8v5M12 16h.01" />
+    </svg>
+  );
+}
+
 export default function WorkoutDetail({ workout }) {
   const { plan, saveWorkout, addToPlan } = usePlan();
 
@@ -55,15 +126,20 @@ export default function WorkoutDetail({ workout }) {
     <main className="detail-page">
       {/* TOAST */}
       {toast && (
-        <div className={`toast toast-${toast.type}`}>
+        <div
+          className={`toast toast-${toast.type}`}
+          role="status"
+          aria-live="polite"
+        >
           <span className="toast-icon">
-            {toast.type === "success" ? "✓" : "!"}
+            {toast.type === "success" ? <CheckIcon /> : <AlertIcon />}
           </span>
 
           <span>{toast.message}</span>
         </div>
       )}
 
+      {/* BACK */}
       <Link href="/" className="back-link">
         ← Back to workouts
       </Link>
@@ -148,7 +224,9 @@ export default function WorkoutDetail({ workout }) {
                 className="already-added-action"
                 onClick={handleAddToPlan}
               >
-                <span className="already-added-icon">✓</span>
+                <span className="action-icon">
+                  <CheckIcon />
+                </span>
 
                 <span>Already in Today's Plan</span>
               </button>
@@ -159,7 +237,11 @@ export default function WorkoutDetail({ workout }) {
                 disabled={planFull}
                 onClick={handleAddToPlan}
               >
-                {planFull ? "Plan Full" : "Add to Today's Plan"}
+                <span className="action-icon">
+                  {planFull ? <AlertIcon /> : <PlusIcon />}
+                </span>
+
+                <span>{planFull ? "Plan Full" : "Add to Today's Plan"}</span>
               </button>
             )}
 
@@ -168,7 +250,11 @@ export default function WorkoutDetail({ workout }) {
               className="secondary-action"
               onClick={handleSave}
             >
-              Save for Later
+              <span className="action-icon">
+                <BookmarkIcon />
+              </span>
+
+              <span>Save for Later</span>
             </button>
           </div>
         </div>

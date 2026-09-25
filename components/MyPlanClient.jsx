@@ -4,6 +4,91 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePlan } from "../context/PlanProvider";
 
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m5 12 4 4L19 6" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="17"
+      height="17"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  );
+}
+
+function FlameIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 22c4 0 7-2.8 7-6.8 0-3.2-1.8-5.6-4.2-7.7.1 2-1 3.2-2.2 3.8.1-3.8-1.7-6.8-4.4-9.3.2 4.5-4.2 6.4-4.2 11.4C4 18.9 7.2 22 12 22Z" />
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" />
+    </svg>
+  );
+}
+
 export default function MyPlanClient() {
   const { plan, saved, done, removeFromPlan, markDone, removeSaved, hydrated } =
     usePlan();
@@ -44,11 +129,6 @@ export default function MyPlanClient() {
   // ==========================================
   // METRICS
   // ==========================================
-  // IMPORTANT:
-  // These now use CURRENT TAB data.
-  //
-  // Today's Plan -> plan
-  // Saved        -> saved
 
   const totalExercises = currentItems.length;
 
@@ -81,9 +161,7 @@ export default function MyPlanClient() {
 
   return (
     <main className="plan-page">
-      {/* ======================================
-          HEADER
-      ====================================== */}
+      {/* HEADER */}
 
       <header className="plan-header">
         <div>
@@ -95,9 +173,7 @@ export default function MyPlanClient() {
         </div>
       </header>
 
-      {/* ======================================
-          METRICS
-      ====================================== */}
+      {/* METRICS */}
 
       <section className="metrics">
         <div className="metric">
@@ -119,13 +195,12 @@ export default function MyPlanClient() {
         </div>
       </section>
 
-      {/* ======================================
-          TOOLBAR
-      ====================================== */}
+      {/* TOOLBAR */}
 
       <div className="plan-toolbar">
         <div className="plan-tabs">
           <button
+            type="button"
             className={activeTab === "plan" ? "plan-tab active" : "plan-tab"}
             onClick={() => setActiveTab("plan")}
           >
@@ -133,6 +208,7 @@ export default function MyPlanClient() {
           </button>
 
           <button
+            type="button"
             className={activeTab === "saved" ? "plan-tab active" : "plan-tab"}
             onClick={() => setActiveTab("saved")}
           >
@@ -147,17 +223,13 @@ export default function MyPlanClient() {
             onChange={(event) => setSortBy(event.target.value)}
           >
             <option value="duration">Duration</option>
-
             <option value="calories">Calories</option>
-
             <option value="rating">Rating</option>
           </select>
         </label>
       </div>
 
-      {/* ======================================
-          EMPTY STATE
-      ====================================== */}
+      {/* EMPTY STATE */}
 
       {sortedItems.length === 0 ? (
         <div className="empty-state">
@@ -170,10 +242,6 @@ export default function MyPlanClient() {
           </Link>
         </div>
       ) : (
-        /* ====================================
-           WORKOUT LIST
-        ==================================== */
-
         <div className="plan-list">
           {sortedItems.map((workout) => {
             const isDone = done.some((id) => String(id) === String(workout.id));
@@ -199,32 +267,48 @@ export default function MyPlanClient() {
                   <p className="plan-card-equipment">{workout.equipment}</p>
 
                   <div className="plan-card-stats">
-                    <span>◷ {workout.duration} min</span>
+                    <span>
+                      <ClockIcon />
+                      {workout.duration} min
+                    </span>
 
-                    <span>♥ {workout.caloriesBurned} kcal</span>
+                    <span>
+                      <FlameIcon />
+                      {workout.caloriesBurned} kcal
+                    </span>
 
-                    <span>☆ {workout.rating}</span>
+                    <span>
+                      <StarIcon />
+                      {workout.rating}
+                    </span>
                   </div>
                 </div>
 
                 {/* ACTIONS */}
 
                 <div className="plan-card-actions">
+                  {/* VIEW DETAILS */}
+
                   <Link href={`/workout/${workout.id}`} className="plan-action">
                     View Details
                   </Link>
 
-                  {/* MARK AS DONE ONLY FOR PLAN */}
+                  {/* MARK AS DONE */}
 
                   {activeTab === "plan" && (
                     <button
+                      type="button"
                       className={
                         isDone ? "plan-action done-action" : "plan-action"
                       }
                       disabled={isDone}
                       onClick={() => markDone(workout.id)}
                     >
-                      {isDone ? "Done" : "Mark as Done"}
+                      <span className="action-icon">
+                        <CheckIcon />
+                      </span>
+
+                      <span>{isDone ? "Done" : "Mark as Done"}</span>
                     </button>
                   )}
 
@@ -232,19 +316,23 @@ export default function MyPlanClient() {
 
                   {activeTab === "plan" ? (
                     <button
+                      type="button"
                       className="remove-action"
-                      aria-label="Remove from plan"
+                      aria-label={`Remove ${workout.name} from plan`}
+                      title="Remove from plan"
                       onClick={() => removeFromPlan(workout.id)}
                     >
-                      ×
+                      <CloseIcon />
                     </button>
                   ) : (
                     <button
+                      type="button"
                       className="remove-action"
-                      aria-label="Remove from saved"
+                      aria-label={`Remove ${workout.name} from saved`}
+                      title="Remove from saved"
                       onClick={() => removeSaved(workout.id)}
                     >
-                      ×
+                      <CloseIcon />
                     </button>
                   )}
                 </div>

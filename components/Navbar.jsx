@@ -17,22 +17,8 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-inner">
-        {/* LEFT SIDE */}
+        {/* LOGO */}
         <div className="navbar-left">
-          {/* MOBILE MENU BUTTON */}
-          <button
-            type="button"
-            className="menu-button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Open navigation menu"
-            aria-expanded={menuOpen}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
-          {/* LOGO */}
           <Link href="/" className="navbar-brand">
             <img
               src="/images/logo.png"
@@ -44,12 +30,11 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* CENTER NAVIGATION */}
-        <nav className={`navbar-links ${menuOpen ? "mobile-open" : ""}`}>
+        {/* DESKTOP NAV */}
+        <nav className="navbar-links">
           <Link
             href="/"
             className={workoutActive ? "navbar-link active" : "navbar-link"}
-            onClick={() => setMenuOpen(false)}
           >
             WORKOUT
           </Link>
@@ -57,35 +42,41 @@ export default function Navbar() {
           <Link
             href="/my-plan"
             className={planActive ? "navbar-link active" : "navbar-link"}
-            onClick={() => setMenuOpen(false)}
           >
             MY PLAN
           </Link>
         </nav>
 
         {/* RIGHT SIDE */}
-        <div className="navbar-actions">
-          <Link
-            href="/my-plan"
-            className="plan-badge"
-            aria-label={`Today's plan: ${plan.length} workouts`}
-          >
-            <span>PLAN</span>
-            <strong>{plan.length}</strong>
-          </Link>
+        <div className="navbar-right">
+          <div className="navbar-actions">
+            <Link href="/my-plan" className="plan-badge">
+              <span>PLAN</span>
+              <strong>{plan.length}</strong>
+            </Link>
 
-          <Link
-            href="/my-plan"
-            className="saved-badge"
-            aria-label={`Saved workouts: ${saved.length}`}
+            <Link href="/my-plan" className="saved-badge">
+              <span>SAVED</span>
+              <strong>{saved.length}</strong>
+            </Link>
+          </div>
+
+          {/* MOBILE MENU BUTTON */}
+          <button
+            type="button"
+            className={`menu-button ${menuOpen ? "open" : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Open navigation menu"
+            aria-expanded={menuOpen}
           >
-            <span>SAVED</span>
-            <strong>{saved.length}</strong>
-          </Link>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
 
-      {/* MOBILE DROPDOWN */}
+      {/* MOBILE MENU */}
       {menuOpen && (
         <div className="mobile-menu">
           <Link

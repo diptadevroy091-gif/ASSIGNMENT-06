@@ -22,7 +22,6 @@ export function PlanProvider({ children }) {
   const [toast, setToast] = useState("");
   const [hydrated, setHydrated] = useState(false);
 
-  // Keeps track of the current toast timer
   const toastTimerRef = useRef(null);
 
   // =========================
@@ -94,15 +93,12 @@ export function PlanProvider({ children }) {
   // TOAST
   // =========================
   function showToast(message) {
-    // Cancel previous timer
     if (toastTimerRef.current) {
       clearTimeout(toastTimerRef.current);
     }
 
-    // Show new message
     setToast(message);
 
-    // Hide after 3 seconds
     toastTimerRef.current = setTimeout(() => {
       setToast("");
       toastTimerRef.current = null;
@@ -130,7 +126,12 @@ export function PlanProvider({ children }) {
         return currentPlan;
       }
 
-      // New workout added
+      // IMPORTANT:
+      // When adding again, reset its old DONE status.
+      setDone((currentDone) =>
+        currentDone.filter((doneId) => String(doneId) !== String(workout.id)),
+      );
+
       showToast(`${workout.name} added to today's plan.`);
 
       return [...currentPlan, workout];
@@ -141,15 +142,15 @@ export function PlanProvider({ children }) {
   // REMOVE FROM PLAN
   // =========================
   function removeFromPlan(id) {
-    // Remove workout from today's plan
+    // Remove from Today's Plan
     setPlan((currentPlan) =>
       currentPlan.filter((item) => String(item.id) !== String(id)),
     );
 
     // IMPORTANT:
-    // Also remove the workout from DONE state.
-    // This means if the same workout is added again,
-    // it will show "Mark as Done" instead of "Done".
+    // Removing with X completely resets DONE status.
+    // So if added again later, it starts from
+    // "Mark as Done".
     setDone((currentDone) =>
       currentDone.filter((doneId) => String(doneId) !== String(id)),
     );
@@ -197,11 +198,16 @@ export function PlanProvider({ children }) {
         (doneId) => String(doneId) === String(id),
       );
 
+      // Already done
       if (alreadyDone) {
         showToast("Workout is already done.");
         return currentDone;
       }
 
+      // IMPORTANT:
+      // DO NOT remove it from plan here.
+      // The card will stay in Today's Plan
+      // and its button/status will become "Done".
       showToast("Workout marked as done.");
 
       return [...currentDone, id];
