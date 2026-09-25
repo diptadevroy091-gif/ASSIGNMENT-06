@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { usePlan } from "../context/PlanProvider";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { plan, saved } = usePlan();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const workoutActive = pathname === "/" || pathname.startsWith("/workout");
 
@@ -15,22 +17,39 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-inner">
-        {/* BRAND */}
-        <Link href="/" className="navbar-brand">
-          <img
-            src="/images/logo.png"
-            alt="FitLog logo"
-            className="navbar-logo"
-          />
+        {/* LEFT SIDE */}
+        <div className="navbar-left">
+          {/* MOBILE MENU BUTTON */}
+          <button
+            type="button"
+            className="menu-button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Open navigation menu"
+            aria-expanded={menuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
 
-          <span className="navbar-brand-text">FITLOG</span>
-        </Link>
+          {/* LOGO */}
+          <Link href="/" className="navbar-brand">
+            <img
+              src="/images/logo.png"
+              alt="FitLog logo"
+              className="navbar-logo"
+            />
 
-        {/* NAVIGATION */}
-        <nav className="navbar-links">
+            <span className="navbar-brand-text">FITLOG</span>
+          </Link>
+        </div>
+
+        {/* CENTER NAVIGATION */}
+        <nav className={`navbar-links ${menuOpen ? "mobile-open" : ""}`}>
           <Link
             href="/"
             className={workoutActive ? "navbar-link active" : "navbar-link"}
+            onClick={() => setMenuOpen(false)}
           >
             WORKOUT
           </Link>
@@ -38,12 +57,13 @@ export default function Navbar() {
           <Link
             href="/my-plan"
             className={planActive ? "navbar-link active" : "navbar-link"}
+            onClick={() => setMenuOpen(false)}
           >
             MY PLAN
           </Link>
         </nav>
 
-        {/* STATUS BADGES */}
+        {/* RIGHT SIDE */}
         <div className="navbar-actions">
           <Link
             href="/my-plan"
@@ -64,6 +84,31 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+
+      {/* MOBILE DROPDOWN */}
+      {menuOpen && (
+        <div className="mobile-menu">
+          <Link
+            href="/"
+            className={
+              workoutActive ? "mobile-menu-link active" : "mobile-menu-link"
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            WORKOUT
+          </Link>
+
+          <Link
+            href="/my-plan"
+            className={
+              planActive ? "mobile-menu-link active" : "mobile-menu-link"
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            MY PLAN
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

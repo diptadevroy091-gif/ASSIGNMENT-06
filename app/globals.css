@@ -11,25 +11,23 @@
   --surface: #14171d;
   --surface-2: #181b22;
   --surface-3: #101318;
-
   --border: #2a303a;
   --border-soft: #222730;
-
   --text: #f5f5f5;
   --muted: #858c99;
   --muted-2: #69717e;
-
   --lime: #ccff00;
   --lime-dark: #b9eb00;
-
   --danger: #ff5c5c;
   --danger-dark: #e04444;
-
   --success: #7dff4f;
   --success-dark: #58d934;
-
   --radius: 10px;
 }
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
   box-sizing: border-box;
@@ -39,8 +37,14 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", sans-serif;
@@ -49,7 +53,8 @@ body {
 body,
 button,
 input,
-select {
+select,
+textarea {
   font-family: "Inter", sans-serif;
 }
 
@@ -73,7 +78,7 @@ img {
 }
 
 /* =========================================================
-   NAVBAR
+   NAVBAR - DESKTOP
 ========================================================= */
 
 .navbar {
@@ -82,7 +87,7 @@ img {
   z-index: 1000;
   width: 100%;
   height: 72px;
-  background: rgba(8, 9, 11, 0.96);
+  background: rgba(8, 9, 11, 0.97);
   border-bottom: 1px solid #1d222a;
   backdrop-filter: blur(12px);
 }
@@ -98,7 +103,7 @@ img {
 }
 
 /* =========================================================
-   NAVBAR LOGO
+   LOGO
 ========================================================= */
 
 .navbar-brand {
@@ -113,27 +118,11 @@ img {
   letter-spacing: 0.04em;
 }
 
-.navbar-logo-mark {
-  width: 25px;
-  height: 25px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 5px;
-  background: var(--lime);
-  color: #111;
-
-  font-family: "Oswald", sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-}
-
 .navbar-logo {
   width: 28px;
   height: 28px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .navbar-brand-text {
@@ -155,7 +144,13 @@ img {
 }
 
 .navbar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 40px;
   padding: 9px 15px;
+
   border-radius: 7px;
 
   color: #8b929e;
@@ -186,6 +181,7 @@ img {
 
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
 }
 
@@ -193,18 +189,21 @@ img {
 .saved-badge {
   min-width: 70px;
 
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
 
   padding: 7px 10px;
+
   border-radius: 20px;
 
   font-size: 9px;
   font-weight: 700;
 
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .plan-badge:hover,
@@ -300,6 +299,7 @@ img {
   margin: 22px 0 26px;
 
   color: #858c98;
+
   font-size: 12px;
   line-height: 1.65;
 }
@@ -347,6 +347,7 @@ img {
   width: 100%;
   max-width: 330px;
   max-height: 330px;
+
   object-fit: contain;
 }
 
@@ -390,6 +391,7 @@ img {
   margin: 7px 0 0;
 
   color: #858c99;
+
   font-size: 11px;
 }
 
@@ -422,6 +424,7 @@ img {
   border-color: #4a5360;
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
 }
+
 .card-image-wrapper {
   position: relative;
 
@@ -497,6 +500,7 @@ img {
   margin: 0;
 
   color: #777f8c;
+
   font-size: 9px;
 }
 
@@ -511,6 +515,7 @@ img {
   border-top: 1px solid #272d35;
 
   color: #858d99;
+
   font-size: 9px;
 }
 
@@ -518,10 +523,6 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-}
-
-.stats-row span:first-child {
-  color: #858d99;
 }
 
 /* =========================================================
@@ -564,7 +565,7 @@ img {
 }
 
 /* =========================================================
-   MY PLAN PAGE
+   MY PLAN
 ========================================================= */
 
 .plan-page {
@@ -594,6 +595,7 @@ img {
   margin: 8px 0 0;
 
   color: #858c99;
+
   font-size: 11px;
 }
 
@@ -633,6 +635,7 @@ img {
   margin-bottom: 6px;
 
   color: #7f8794;
+
   font-size: 10px;
 }
 
@@ -707,6 +710,7 @@ img {
   gap: 9px;
 
   color: #858c99;
+
   font-size: 10px;
 }
 
@@ -717,7 +721,6 @@ img {
 
   border: 1px solid #303742;
   border-radius: 7px;
-
   outline: none;
 
   background: #14171d;
@@ -762,7 +765,8 @@ img {
 
   transition:
     border-color 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .plan-card:hover {
@@ -806,6 +810,7 @@ img {
   margin: 0;
 
   color: #7c8490;
+
   font-size: 10px;
 }
 
@@ -817,6 +822,7 @@ img {
   margin-top: 11px;
 
   color: #8b929e;
+
   font-size: 9px;
 }
 
@@ -868,10 +874,6 @@ img {
   color: #ffffff;
 }
 
-/* =========================================================
-   MARK AS DONE BUTTON
-========================================================= */
-
 .plan-card-actions button.plan-action {
   border-color: var(--lime);
   background: var(--lime);
@@ -882,7 +884,6 @@ img {
   border-color: var(--lime-dark);
   background: var(--lime-dark);
   color: #111111;
-
   transform: translateY(-1px);
 }
 
@@ -898,7 +899,7 @@ img {
 }
 
 /* =========================================================
-   REMOVE BUTTON
+   REMOVE
 ========================================================= */
 
 .remove-action {
@@ -962,6 +963,7 @@ img {
   margin: 9px 0 20px;
 
   color: #7e8692;
+
   font-size: 11px;
 }
 
@@ -1015,6 +1017,7 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+
   align-items: start;
 }
 
@@ -1202,10 +1205,6 @@ img {
     color 0.2s ease;
 }
 
-/* =========================================================
-   ADD TO PLAN
-========================================================= */
-
 .primary-action {
   background: var(--lime);
   color: #111111;
@@ -1219,10 +1218,6 @@ img {
 .primary-action:disabled {
   opacity: 0.45;
 }
-
-/* =========================================================
-   ALREADY ADDED BUTTON
-========================================================= */
 
 .already-added-action {
   min-height: 40px;
@@ -1254,7 +1249,6 @@ img {
 .already-added-action:hover {
   border-color: #66851d;
   background: #1c2512;
-
   transform: translateY(-1px);
 }
 
@@ -1275,10 +1269,6 @@ img {
   font-weight: 900;
 }
 
-/* =========================================================
-   SECONDARY ACTION
-========================================================= */
-
 .secondary-action {
   border: 1px solid #3a424d;
 
@@ -1289,20 +1279,17 @@ img {
 .secondary-action:hover {
   border-color: #68717e;
   color: #ffffff;
-
   transform: translateY(-1px);
 }
 
 /* =========================================================
-   TOAST - DEFAULT POSITIVE / SUCCESS
+   TOAST
 ========================================================= */
 
 .toast {
   position: fixed;
-
   top: 88px;
   right: 24px;
-
   z-index: 99999;
 
   min-width: 245px;
@@ -1317,9 +1304,6 @@ img {
   border: 1px solid #477c2d;
   border-radius: 8px;
 
-  /*
-    GREEN SUCCESS TOAST
-  */
   background: #14220f;
   color: #ffffff;
 
@@ -1334,8 +1318,6 @@ img {
     toast-in 0.25s ease,
     toast-out 0.25s ease 2.75s forwards;
 }
-
-/* Green check icon */
 
 .toast::before {
   content: "✓";
@@ -1358,15 +1340,6 @@ img {
   font-weight: 900;
 }
 
-/* =========================================================
-   TOAST - SUCCESS VARIATIONS
-========================================================= */
-
-/*
-  If your React code uses any of these classes,
-  they will also become GREEN.
-*/
-
 .success-toast,
 .toast.success,
 .toast-success {
@@ -1383,10 +1356,6 @@ img {
   color: #101010;
 }
 
-/* =========================================================
-   TOAST ANIMATION
-========================================================= */
-
 @keyframes toast-in {
   from {
     opacity: 0;
@@ -1398,6 +1367,7 @@ img {
     transform: translateX(0) scale(1);
   }
 }
+
 @keyframes toast-out {
   from {
     opacity: 1;
@@ -1411,15 +1381,13 @@ img {
 }
 
 /* =========================================================
-   DUPLICATE / NEGATIVE TOAST
+   DUPLICATE / ERROR TOAST
 ========================================================= */
 
 .duplicate-toast {
   position: fixed;
-
   top: 88px;
   right: 24px;
-
   z-index: 99999;
 
   min-width: 245px;
@@ -1434,9 +1402,6 @@ img {
   border: 1px solid #713333;
   border-radius: 8px;
 
-  /*
-    RED NEGATIVE TOAST
-  */
   background: #211313;
   color: #ffffff;
 
@@ -1494,10 +1459,6 @@ img {
     transform: translateX(25px);
   }
 }
-
-/* =========================================================
-   OTHER NEGATIVE TOAST CLASS SUPPORT
-========================================================= */
 
 .error-toast,
 .toast.error,
@@ -1557,6 +1518,7 @@ img {
 .footer-brand img {
   width: 22px;
   height: 22px;
+
   object-fit: contain;
 }
 
@@ -1566,12 +1528,16 @@ img {
 }
 
 /* =========================================================
-   RESPONSIVE — TABLET
+   TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
   .navbar-inner {
-    width: min(100% - 30px, 1180px);
+    width: calc(100% - 30px);
+  }
+
+  .navbar-link {
+    padding: 9px 12px;
   }
 
   .hero {
@@ -1614,63 +1580,117 @@ img {
 }
 
 /* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE NAVBAR
 ========================================================= */
 
 @media (max-width: 650px) {
   .navbar {
     height: auto;
-    min-height: 72px;
+    min-height: 64px;
   }
 
   .navbar-inner {
-    width: calc(100% - 24px);
-    min-height: 72px;
+    width: calc(100% - 20px);
+    min-height: 64px;
 
-    grid-template-columns: 1fr auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
 
-    padding: 12px 0;
-    row-gap: 10px;
+    align-items: center;
+
+    padding: 8px 0;
+
+    gap: 8px;
   }
 
+  /*
+    Current Navbar.jsx:
+    logo is on left,
+    navigation is beside it,
+    badges on right.
+    
+    On mobile we keep everything compact
+    so it does not wrap into 3 separate rows.
+  */
+
   .navbar-brand {
-    font-size: 16px;
+    justify-self: start;
+    gap: 6px;
+
+    font-size: 15px;
+  }
+
+  .navbar-logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .navbar-brand-text {
+    font-size: 15px;
+  }
+
+  .navbar-links {
+    justify-self: center;
+
+    display: flex;
+
+    width: auto;
+
+    gap: 2px;
+  }
+
+  .navbar-link {
+    min-height: 36px;
+
+    padding: 8px 9px;
+
+    border-radius: 6px;
+
+    font-size: 9px;
   }
 
   .navbar-actions {
-    gap: 5px;
+    justify-self: end;
+
+    gap: 4px;
   }
 
   .plan-badge,
   .saved-badge {
-    min-width: 59px;
-    padding: 6px 8px;
+    min-width: 52px;
+
+    gap: 4px;
+
+    padding: 6px 6px;
+
+    border-radius: 18px;
   }
 
-  .navbar-links {
-    grid-column: 1 / -1;
-
-    width: 100%;
-
-    justify-content: center;
+  .plan-badge span,
+  .saved-badge span {
+    font-size: 7px;
   }
 
-  .navbar-link {
-    flex: 1;
-    text-align: center;
+  .plan-badge strong,
+  .saved-badge strong {
+    font-size: 9px;
   }
+
+  /* HOME */
 
   .home {
-    width: calc(100% - 24px);
+    width: calc(100% - 20px);
     padding-top: 20px;
   }
+
+  /* HERO */
 
   .hero {
     grid-template-columns: 1fr;
 
-    padding: 30px 24px;
-
     min-height: auto;
+
+    padding: 30px 22px;
   }
 
   .hero-title {
@@ -1683,12 +1703,15 @@ img {
 
   .hero-visual {
     min-height: 230px;
+
     margin-top: 12px;
   }
 
   .hero-visual img {
     max-height: 230px;
   }
+
+  /* LIBRARY */
 
   .library {
     margin-top: 40px;
@@ -1698,9 +1721,11 @@ img {
     grid-template-columns: 1fr;
   }
 
+  /* PLAN */
+
   .plan-page,
   .detail-page {
-    width: calc(100% - 24px);
+    width: calc(100% - 20px);
     padding-top: 28px;
   }
 
@@ -1734,14 +1759,14 @@ img {
 
   .plan-toolbar {
     align-items: flex-start;
+    flex-direction: column;
 
     gap: 14px;
-
-    flex-direction: column;
   }
 
   .sort-box {
     width: 100%;
+
     justify-content: space-between;
   }
 
@@ -1752,6 +1777,7 @@ img {
 
   .plan-card {
     grid-template-columns: 1fr;
+
     padding: 12px;
   }
 
@@ -1762,6 +1788,7 @@ img {
 
   .plan-card-actions {
     display: grid;
+
     grid-template-columns: 1fr 1fr auto;
 
     width: 100%;
@@ -1770,6 +1797,8 @@ img {
   .plan-action {
     width: 100%;
   }
+
+  /* DETAIL */
 
   .detail-title {
     font-size: 40px;
@@ -1785,23 +1814,31 @@ img {
     width: 100%;
   }
 
+  /* TOAST */
+
   .toast,
   .duplicate-toast {
-    top: 84px;
-    right: 14px;
-    left: auto;
-    min-width: 220px;
-    max-width: calc(100vw - 28px);
+    top: 76px;
+    right: 10px;
+    left: 10px;
+
+    min-width: 0;
+    max-width: none;
+
+    width: auto;
   }
 
+  /* FOOTER */
+
   .footer-inner {
-    width: calc(100% - 24px);
+    width: calc(100% - 20px);
 
     min-height: auto;
 
     padding: 20px 0;
 
     flex-direction: column;
+
     justify-content: center;
 
     gap: 10px;
@@ -1815,35 +1852,62 @@ img {
 ========================================================= */
 
 @media (max-width: 420px) {
+  .navbar-inner {
+    width: calc(100% - 14px);
+    gap: 4px;
+  }
+
+  .navbar-brand {
+    gap: 4px;
+  }
+
+  .navbar-brand-text {
+    font-size: 13px;
+  }
+
+  .navbar-logo {
+    width: 23px;
+    height: 23px;
+  }
+
+  .navbar-links {
+    gap: 0;
+  }
+
+  .navbar-link {
+    padding: 8px 6px;
+    font-size: 8px;
+  }
+
+  .navbar-actions {
+    gap: 3px;
+  }
+
+  .plan-badge,
+  .saved-badge {
+    min-width: 46px;
+
+    gap: 3px;
+
+    padding: 5px 4px;
+  }
+
+  .plan-badge span,
+  .saved-badge span {
+    font-size: 6px;
+  }
+
+  .plan-badge strong,
+  .saved-badge strong {
+    font-size: 9px;
+  }
+
   .hero-title {
     font-size: 37px;
   }
 
   .section-title {
     font-size: 26px;
-  }
-
-  .navbar-actions {
-    gap: 4px;
-  }
-
-  .plan-badge,
-  .saved-badge {
-    min-width: 52px;
-
-    gap: 4px;
-
-    padding: 6px;
-  }
-
-  .plan-badge span,
-  .saved-badge span {
-    font-size: 7px;
-  }
-
-  .plan-badge strong,
-  .saved-badge strong {
-    font-size: 10px;
   }
 
   .plan-tabs {
